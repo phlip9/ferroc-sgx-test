@@ -1,0 +1,14 @@
+[package]
+name = "ferroc-sgx-test"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+ferroc = { path = "../ferroc", default-features = false, features = [
+    "base-static", "global"
+] }
+
+[profile.release]
+panic = "abort"
+[profile.dev]
+panic = "abort"

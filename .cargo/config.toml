@@ -1,0 +1,7 @@
+[target.x86_64-fortanix-unknown-sgx]
+# Use our custom SGX runner
+runner = "run-sgx-cargo"
+
+# [unstable]
+# build-std = ["std", "panic_abort"]
+# build-std-features = []
