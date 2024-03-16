@@ -23,7 +23,7 @@ fn image_base() -> *mut () {
 
 #[cfg(not(all(target_vendor = "fortanix", target_env = "sgx")))]
 fn image_base() -> *mut () {
-    ptr::null_mut()
+    std::ptr::null_mut()
 }
 
 // Do not remove inline: will result in relocation failure
@@ -43,6 +43,7 @@ pub(crate) fn heap_base() -> *mut () {
 }
 
 /// Returns the size of the heap
+#[inline(always)]
 pub(crate) fn heap_size() -> usize {
     unsafe { HEAP_SIZE }
 }
