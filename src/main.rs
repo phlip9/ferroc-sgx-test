@@ -17,6 +17,11 @@ mod alloc;
 mod alloc_expanded;
 mod sgx;
 
+// Align to x86_64 double cache-line size to prevent false sharing on the atomic
+// pointer.
+//
+// See: <https://docs.rs/crossbeam-utils/0.8.19/src/crossbeam_utils/cache_padded.rs.html#80-87>
+#[repr(align(128))]
 pub(crate) struct SgxHeap {
     top: AtomicPtr<()>,
 }
