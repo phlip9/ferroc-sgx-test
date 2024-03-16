@@ -5,12 +5,12 @@ mod sgx;
 mod unix;
 
 #[inline(always)]
-pub(crate) fn heap_base() -> *mut () {
+pub(crate) fn heap_base_ptr() -> *mut () {
     #[cfg(all(target_env = "sgx", target_vendor = "fortanix"))]
-    return sgx::heap_base();
+    return sgx::heap_base_ptr();
 
     #[cfg(not(all(target_env = "sgx", target_vendor = "fortanix")))]
-    return unix::heap_base();
+    return unix::heap_base_ptr();
 }
 
 #[inline(always)]
@@ -23,6 +23,6 @@ pub(crate) fn heap_size() -> usize {
 }
 
 #[inline(always)]
-pub(crate) fn heap_end() -> *mut () {
-    heap_base().wrapping_byte_add(heap_size())
+pub(crate) fn heap_end_ptr() -> *mut () {
+    heap_base_ptr().wrapping_byte_add(heap_size())
 }

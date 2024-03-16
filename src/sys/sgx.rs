@@ -3,9 +3,8 @@
 ///
 /// This is copied from: [std::os::fortanix_sgx::mem::image_base](https://github.com/rust-lang/rust/blob/master/library/std/src/sys/sgx/abi/mem.rs#L37)
 // NOTE: Do not remove inline: will result in relocation failure.
-#[cfg(all(target_vendor = "fortanix", target_env = "sgx"))]
 #[inline(always)]
-fn image_base() -> *mut () {
+fn image_base_ptr() -> *mut () {
     use std::arch::asm;
 
     let base: *mut ();
@@ -21,15 +20,10 @@ fn image_base() -> *mut () {
     base
 }
 
-#[cfg(not(all(target_vendor = "fortanix", target_env = "sgx")))]
-fn image_base() -> *mut () {
-    std::ptr::null_mut()
-}
-
 // Do not remove inline: will result in relocation failure
 #[inline(always)]
 pub(crate) unsafe fn rel_ptr_mut(offset: usize) -> *mut () {
-    image_base().wrapping_byte_add(offset)
+    image_base_ptr().wrapping_byte_add(offset)
 }
 
 extern "C" {
@@ -38,7 +32,7 @@ extern "C" {
 }
 
 /// Returns the base memory address of the heap
-pub(crate) fn heap_base() -> *mut () {
+pub(crate) fn heap_base_ptr() -> *mut () {
     unsafe { rel_ptr_mut(HEAP_BASE) }
 }
 

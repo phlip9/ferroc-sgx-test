@@ -37,7 +37,7 @@ impl SgxHeapBump {
     fn heap_top(&self) -> *mut () {
         use std::sync::atomic::Ordering::{AcqRel, Acquire};
 
-        let base = sys::heap_base();
+        let base = sys::heap_base_ptr();
         match self
             .top
             .0
@@ -57,7 +57,7 @@ impl SgxHeapBump {
         loop {
             let aligned = (top.addr().checked_add(layout.align() - 1))? & !(layout.align() - 1);
             let end = aligned.checked_add(layout.size());
-            let end = end.filter(|&end| end < sys::heap_end().addr())?;
+            let end = end.filter(|&end| end < sys::heap_end_ptr().addr())?;
 
             let new = NonNull::new(top.with_addr(aligned))?;
             match self
