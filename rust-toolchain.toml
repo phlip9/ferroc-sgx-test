@@ -1,6 +1,6 @@
 [toolchain]
 channel = "nightly-2024-03-12"
-components = ["clippy", "rustfmt"]
+components = ["clippy", "rustfmt", "miri"]
 targets = [
     # Enclave target
     "x86_64-fortanix-unknown-sgx",
