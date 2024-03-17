@@ -5,12 +5,13 @@
 #![feature(strict_provenance)]
 // #![feature(sgx_platform)]
 
-pub mod alloc;
+pub(crate) mod alloc;
+pub(crate) mod alloc2;
 mod alloc_expanded;
 mod sys;
 
-// #[global_allocator]
-// static GLOBAL_SGX_ALLOC: crate::alloc::SgxHeapAlloc = crate::alloc::SgxHeapAlloc;
+#[global_allocator]
+static GLOBAL_SGX_ALLOC: crate::alloc::SgxHeapAlloc = crate::alloc::SgxHeapAlloc;
 
 fn main() {
     println!("Hello, world!");

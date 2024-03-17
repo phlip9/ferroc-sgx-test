@@ -1,8 +1,8 @@
 use std::cell::UnsafeCell;
 
-const ONE_MIB: usize = 1 << 20; // 1 MiB
+const HEAP_SIZE: usize = 4 * (1 << 20); // 4 MiB
 
-static HEAP: Heap<ONE_MIB> = Heap::<ONE_MIB>::new();
+static HEAP: Heap<HEAP_SIZE> = Heap::<HEAP_SIZE>::new();
 
 // Page align
 #[repr(align(4096))]

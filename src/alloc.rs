@@ -17,7 +17,7 @@ use crate::sys;
 struct CachePadded<T>(T);
 
 // `SgxHeapAlloc` is a full-featured allocator (e.g. can actually free memory).
-ferroc::config!(pub SgxHeapAlloc => SgxHeapBump);
+ferroc::config!(pub(crate) SgxHeapAlloc => SgxHeapBump);
 
 /// A bump allocator over the fixed SGX heap, used for allocating larger extants
 /// by the fullf-featured [`SgxHeapAlloc`] allocator.

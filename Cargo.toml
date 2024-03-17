@@ -4,11 +4,12 @@ version = "0.1.0"
 edition = "2021"
 
 [dependencies]
+arbitrary = {version = "1", features = ["derive"]}
 ferroc = { path = "../ferroc", default-features = false, features = [
     "base-static", "global"
 ] }
 
-[profile.release]
-panic = "abort"
-[profile.dev]
-panic = "abort"
+# [profile.release]
+# panic = "abort"
+# [profile.dev]
+# panic = "abort"
